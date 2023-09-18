@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+        <title>Modul Website</title>
+        
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+            
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
+
+        <style>
+            body {
+                width: 100%;
+                overflow: hidden;
+            }
+            .container-fluid {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                transition: 1s;
+            }
+            a[name=modul] {
+                width: 200px;
+                text-decoration: none;
+                text-align: center;
+            }
+            ul li {
+                position: relative;
+                transition: 1.5s ease;
+            }
+            ul li:nth-child(1) {
+                transform: translateX(1000%);
+                transition-delay: 0s;
+            }
+            ul li:nth-child(2) {
+                transform: translateX(-1000%);
+                transition-delay: 0.25s;
+            }
+            ul li:nth-child(3) {
+                transform: translateX(1000%);
+                transition-delay: 0.5s;
+            }
+            ul li:nth-child(4) {
+                transform: translateX(-1000%);
+                transition-delay: 0.75s;
+            }
+            ul li:nth-child(5) {
+                transform: translateX(1000%);
+                transition-delay: 1s;
+            }
+            ul li:nth-child(6) {
+                transform: translateX(-1000%);
+                transition-delay: 1.25s;
+            }
+            ul li:nth-child(7) {
+                transform: translateX(1000%);
+                transition-delay: 1.50s;
+            }
+            ul li:nth-child(8) {
+                transform: translateX(-1000%);
+                transition-delay: 1.75s;
+            }
+            ul li:nth-child(9) {
+                transform: translateX(1000%);
+                transition-delay: 2s;
+            }
+            
+            .up {
+                animation: up 1s ease;
+            }
+            @keyframes up {
+                from {
+                    position: fixed;
+                    top: 100%;
+                }
+                to {
+                    position: fixed;
+                    top: 0;
+                }
+            }
+
+            .kotak-top,
+            .kotak-bottom {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                background-color: grey;
+                transition: 1s ease;
+            }
+            .kotak-top {
+                bottom: 50%;
+            }
+            .kotak-bottom {
+                top: 50%;
+            }
+
+            .refresh {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                top: 0;
+            }
+            .hide {
+                display: none;
+            }
+        </style>
+    </head>
+    <body onload="up()">
+        <div class="kotak-top"></div>
+
+        <div class="container-fluid">
+            <h2 class="mb-2">Modul Website</h2>
+            <ul class="list-unstyled">
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_html/html_dasar.html">HTML</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_css/belajar_css.html">CSS</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_javascript/javascript_dasar.html">JavaScript</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_database_mysql/database_mysql.html">Database MySQL</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_crud/crud_php_mysql.html">CRUD</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_bootstrap_5/bootstrap_5.html">Bootstrap 5</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_java_oop/belajar_java_oop.html">Java OOP</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_command_prompt/belajar_command_prompt.html">Command Prompt</a></li>
+                <li><a class="btn btn-outline-primary mb-2" name="modul" href="belajar_github/git_dan_github.html">Git & GitHub</a></li>
+            </ul>
+        </div>
+
+        <div class="kotak-bottom"></div>
+        
+        <div class="refresh hide">
+            <a href="" class="btn btn-outline-light btn-lg"><i class="fa fa-rotate-right"></i> Refresh</a>
+        </div>
+
+        <script>
+            const container = document.querySelector('.container-fluid');
+            const pilihModul = document.querySelectorAll('a[name=modul]');
+            const list = document.querySelectorAll('li');
+            const kotakAtas = document.querySelector('.kotak-top');
+            const kotakBawah = document.querySelector('.kotak-bottom');
+            const refresh = document.querySelector('.refresh');
+
+            function up() {
+                setTimeout(function() {
+                    kotakAtas.style.transform = 'translateY(-100%)';
+                    kotakBawah.style.transform = 'translateY(100%)';
+                    container.classList.add('up');
+                    list.forEach(function(e) {
+                        e.style.transform = 'translateX(0)'
+                    })
+                }, 1000)
+                setTimeout(function() {
+                    container.classList.remove('up');
+                }, 2000)
+            }
+
+            for ( let i = 0; i < pilihModul.length; i++ ) {
+                pilihModul[i].addEventListener('click', function() {
+                    pilihModul[i].classList.add('btn-outline-secondary');
+                    setTimeout(function() {
+                        list.forEach(function(e, i) {
+                            if ( i % 2 == 0 ) {
+                                e.style.transform = 'translateX(1000%)';
+                            } else {
+                                e.style.transform = 'translateX(-1000%)';
+                            }
+                        })
+                    }, 200)
+                    setTimeout(function() {
+                        container.style.transform = 'translateY(100%)';
+                    }, 2000)
+                    setTimeout(function() {
+                        kotakAtas.style.transform = 'translateY(50%)';
+                        kotakBawah.style.transform = 'translateY(-50%)';
+                    }, 2500)
+                    setTimeout(function() {
+                        refresh.classList.remove('hide');
+                    }, 3500)
+                })
+            }
+        </script>
+    </body>
+</html>
